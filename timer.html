@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/flipclock.css">
+
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/flipclock.js"></script>
+
+	</head>
+	<body>
+	<div class="clock" style="margin:2em;"></div>
+	<div class="message"></div>
+	<input type="text" name="firstname"/>
+	<button class="start">Start Clock</button>
+
+<form id="zeit">
+      <li> 
+        <label>
+          <input type="radio" name="zeit" value="15">
+          15
+        </label>
+      </li>
+      <li> 
+        <label>
+           <input type="radio" name="zeit" value="30">
+           30
+        </label>
+      </li>
+      <li>  
+        <label>
+          <input type="radio" name="zeit" value="60">
+          60
+        </label>
+      </li>
+    </form>
+
+
+
+	<script type="text/javascript">
+		var clock;
+
+		var zeit = document.getElementById("zeit");
+		var zeit_value = zeit.elements["zeit"].value;
+
+		$(document).ready(function() {
+			
+			clock = $('.clock').FlipClock(zeit_value, {
+		        clockFace: 'MinuteCounter',
+		        countdown: true,
+		        autoStart: false,
+		        callbacks: {
+		        	start: function() {
+		        		$('.message').html('The clock has started!');
+		        	}
+		        }
+		    });
+
+		    $('.start').click(function(e) {
+
+		    	clock.start();
+		    });
+
+		});
+	</script>
+	
+	</body>
+</html>
