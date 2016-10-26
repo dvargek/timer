@@ -1,49 +1,30 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="css/flipclock.css">
+		<link rel="stylesheet" href="css/flipclock.css"></link>
 
 		<script src="js/jquery-3.1.1.min.js"></script>
 		<script src="js/flipclock.js"></script>
 
 	</head>
 	<body>
-	<div class="clock" style="margin:2em;"></div>
+	<div id="clock" class="clock" style="margin:2em;"></div>
 	<div class="message"></div>
-	<input type="text" name="firstname"/>
+
 	<button class="start">Start Clock</button>
 
-<form id="zeit">
-      <li> 
-        <label>
-          <input type="radio" name="zeit" value="15">
-          15
-        </label>
-      </li>
-      <li> 
-        <label>
-           <input type="radio" name="zeit" value="30">
-           30
-        </label>
-      </li>
-      <li>  
-        <label>
-          <input type="radio" name="zeit" value="60">
-          60
-        </label>
-      </li>
-    </form>
-
-
+    <form id="zeit">
+		<input type="radio" name="zeit" value=15><label>15</label>
+		<input type="radio" name="zeit" value=30><label>30</label>
+		<input type="radio" name="zeit" value=60><label>60</label>
+	</form>
 
 	<script type="text/javascript">
 		var clock;
-
-		var zeit = document.getElementById("zeit");
-		var zeit_value = zeit.elements["zeit"].value;
+		var time_val = localStorage.getItem('zeit');
 
 		$(document).ready(function() {
 			
-			clock = $('.clock').FlipClock(zeit_value, {
+			clock = $('.clock').FlipClock(time_val, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
@@ -55,11 +36,15 @@
 		    });
 
 		    $('.start').click(function(e) {
-
 		    	clock.start();
 		    });
-
 		});
+
+		$('input[name="zeit"]').on('change', function(){
+		    localStorage.setItem('zeit', $(this).val());
+		    var time_val = localStorage.getItem('zeit');
+		    location.reload();
+    	});
 	</script>
 	
 	</body>
